@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="/Scripts/jquery-1.10.2.js"></script>
+<script src="/Scripts/jquery.signalR-2.2.1.js"></script>
+<script src="/signalr/hubs"></script>
+<script type="text/javascript">
+        var messagehub = $.connection.UserHub;
+    
+            $.connection.hub.start().done(function () {
+                $("#buttonId").click(function () {
+                    var userName = $("#userName").val();
+                    var userAge = $("#userAge").val();
+                    var userSalary = $("#userSalary").val();
+                    messagehub.server.GetUser(userName,userAge,userSalary);
+                });
+            });
+  
+        
+   /* function addUser() {
+       
+        var userName = "deneme";//$("userName").val();
+        var userAge = 21;//$("userAge").val();
+        var userSalary = 100;//$("userSalary").val();
+        
+        messagehub.server.GetUser(userName, userAge, userSalary);
+    }*/
+
+</script>
+<p></p>
+
+
+    <div class="form-group">
+        <label for="comment">User Name:</label>
+        <input class="form-control" id="userName" name="userName"/>
+        <label for="comment">User Age</label>
+        <input class="form-control" id="userAge" name="userAge" />
+        <label for="comment">User Salary</label>
+        <input class="form-control" id="userSalary" name="userSalary" />
+        <button type="submit" id="buttonId">Update</button>
+    </div>
+
